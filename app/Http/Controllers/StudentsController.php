@@ -51,14 +51,23 @@ class StudentsController extends Controller
             'first_name'        => 'required|max:60',
             'last_name'        => 'required|max:60',
             'email'        => "required|max:60|unique:students,email,$request->student_id",
-            // 'image'        => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'profile_image'        => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
         if ($validator->fails()) {
             return response()->json(['error'=>$validator->errors()->first()]);
         }
         Student::updateOrCreate(['id' => $request->student_id],
                 ['first_name' => $request->first_name,'last_name' => $request->last_name, 'email' => $request->email]);        
-   
+                if ($request->hasFile('profile_image')) {
+                    $extension = $request->file('profile_image')->getClientOriginalExtension();
+                    $file_name = date('YmdHis') . '_' . $teacher->id . '.' . $extension;
+                    $path = 'image/';
+                    $store = $request->file('profile_image')->storeAs($path, $file_name);
+                    
+                    $teacher->profile_image=$file_name;
+                    $teacher->save();
+                }
+
         return response()->json(['success'=>'Student saved successfully.']);
     }
     /**

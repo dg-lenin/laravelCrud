@@ -73,11 +73,16 @@
 			$('#err_text').html("Please enter valid email");
 		  }
 		  else{
+			var form = $("#teacherForm").closest("form");
+			var formData = new FormData(form[0]);
+
 		  $.ajax({
-			data: $('#teacherForm').serialize(),
+			data: formData,
 			url: "{{ route('teachers.store') }}",
 			type: "POST",
 			dataType: 'json',
+			processData: false,
+    		contentType: false,
 			success: function (data) {
 				if(data.error){
 					$('#err_text').html(data.error);
@@ -127,7 +132,7 @@
                 <h4 class="modal-title"> Teacher</h4>
             </div>
             <div class="modal-body">
-                <form id="teacherForm" name="teacherForm" class="form-horizontal">
+                <form id="teacherForm" name="teacherForm" class="form-horizontal" enctype="multipart/form-data" method="POST" >
                     <input type="hidden" name="teacher_id" id="teacher_id">
                      <div class="form-group">
                          <label for="first_name" class="col-sm-4">First name<span class="text-danger">*</span></label>
@@ -146,6 +151,12 @@
                          <label class="col-sm-4">Email<span class="text-danger">*</span></label>
                          <div class="col-sm-12">
                             <input type="text" class="form-control" id="email" name="email" placeholder="Enter email" value="" maxlength="50" required="">
+                         </div>
+                     </div>
+					 <div class="form-group">
+                         <label class="col-sm-4">Image</label>
+                         <div class="col-sm-12">
+                            <input type="file" class="form-control" id="profile_image" name="profile_image"  value="" accept="image/*">
                          </div>
                      </div>
 					 <div><span class="text-danger" id="err_text">&nbsp;</span></div>

@@ -22,4 +22,10 @@ class Student extends Model
     {
     	return $this->belongsToMany('App\Models\Teacher', 'teacher_student', 'student_id', 'teacher_id');
     }
+
+    public function availableStudents()
+    {
+        // $ids = \DB::table('teacher_student')->where('student_id', '=', $this->id)->lists('student_id');
+        // return \Student::whereNotIn('id', $ids)->get();
+    }
 }
