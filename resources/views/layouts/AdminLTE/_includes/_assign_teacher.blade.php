@@ -83,20 +83,10 @@
 	  });
 	  $('body').on('click', '.deleteTeacher', function () {
 	   
-		  var teacher_id = $(this).data("id");
+		  var id = $(this).data("id");
 		  confirm("Are You sure want to delete !");
 		
-		  $.ajax({
-			  type: "get",
-			  url: "{{ route('assignUserDelete') }}"+'/'+teacher_id,
-			  success: function (data) {
-				  table.draw();
-				  location.reload();
-			  },
-			  error: function (data) {
-				  console.log('Error:', data);
-			  }
-		  });
+		
 	  });
 	   
 	});

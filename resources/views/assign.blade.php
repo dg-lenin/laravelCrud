@@ -24,8 +24,8 @@
                 <td>{{$teacher['teacher_name']}}</td>
                 <td>{{$teacher['student_name']}}</td>
                 <td>
-                    <a href="javascript:void(0)" data-toggle="tooltip"  data-id="{{$teacher['id']}}" data-original-title="Edit" class="edit btn btn-primary btn-sm editTeacher">Edit</a>
-                    <a href="javascript:void(0)" data-toggle="tooltip"  data-id="{{$teacher['id']}}" data-original-title="Delete" class="btn btn-danger btn-sm deleteTeacher">Delete</a>
+                    {{-- <a href="javascript:void(0)" data-toggle="tooltip"  data-id="{{$teacher['id']}}" data-original-title="Edit" class="edit btn btn-primary btn-sm editTeacher">Edit</a> --}}
+                    <a href="{{ route('assignUserDelete', $teacher['id']) }}" data-toggle="tooltip"  data-id="{{$teacher['id']}}" data-original-title="Delete" class="btn btn-danger btn-sm deleteTeacher">Delete</a>
                 </td>
         </tr>
         @endforeach

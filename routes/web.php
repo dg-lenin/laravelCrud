@@ -49,6 +49,6 @@ Route::group(['namespace' => 'App\Http\Controllers\User'], function (){
 Route::resource('teachers', TeachersController::class);
 Route::resource('students', StudentsController::class);
 
-Route::get('assign', 'App\Http\Controllers\TeachersController@assignList');
+Route::get('assign', 'App\Http\Controllers\TeachersController@assignList')->name('assignList');
 Route::post('assign-user', 'App\Http\Controllers\TeachersController@assignUser')->name('assignUser');
-Route::get('assign-user-delete', 'App\Http\Controllers\TeachersController@assignUserDelete')->name('assignUserDelete');
+Route::get('assign-user-delete/{id}', 'App\Http\Controllers\TeachersController@assignUserDelete')->name('assignUserDelete');

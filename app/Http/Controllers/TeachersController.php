@@ -118,8 +118,12 @@ class TeachersController extends Controller
 
     public function assignUserDelete($id)
     {
+        // dd($id);
         $teacher = DB::table('teacher_student')->where('id',$id)->delete();
+        $this->flashMessage('check', 'UnAssigned successfully!', 'success');
 
-        return response()->json(['success'=>'Assigned successfully.']);
+        return redirect()->route('assignList');
+
+        // return response()->json(['success'=>'UnAssigned successfully.']);
     }
 }
